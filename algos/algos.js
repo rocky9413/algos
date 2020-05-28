@@ -21,5 +21,67 @@ function countdown(myArray, n) {
 }
 // console.log(countdown([], 5));
 
-// new code below -->
-// ==========================================
+const leaseNumber = (numbers) => {
+  if(numbers.length === 0 ) return '';
+  if(numbers.length === 1 ) return numbers;
+
+  const obj = {}
+  for (let i = 0; i< numbers.length; ++i){
+    if(obj[numbers[i]]) obj[numbers[i]]++;
+    else {
+      obj[numbers[i]] = 1;
+    }
+  }
+
+  const sortable = [];
+  for (let key in obj) {
+    sortable.push([key, obj[key]]);
+  }
+
+  sortable.sort((a, b) => a[1] - b[1]);
+
+  const arr = [sortable[0][0]];
+
+  for (let i = 1; i<sortable.length; i++){
+    if(sortable[0][1] === sortable[i][1]){
+      arr.push(sortable[i][0]);
+    }
+  }
+
+  return arr.map(e => Number(e));
+};
+// console.log(leaseNumber([10, 491, 13, 13, 13, 10, 491]));
+
+
+const emitNreceive = (messages) => {
+  class Emitter {
+    constructor(messages = []) {
+      this.messages = messages;
+      this.event = () => {};
+    }
+    setEvent(fn) {
+      this.event = fn;
+    }
+    trigger() {
+      this.messages.forEach(message => this.event(message));
+    }
+  }
+
+  class Receiver {
+    constructor() {
+      this.messages = [];
+    }
+    ping = (message) => {
+      this.messages.push(message);
+    }
+  }
+
+  const myEmitter = new Emitter(messages);
+  const myReceiver = new Receiver();
+  myEmitter.setEvent(myReceiver.ping);
+  myEmitter.trigger();
+  // console.log(myEmitter)
+  // console.log(myReceiver)
+  return myReceiver.messages;
+};
+// console.log(emitNreceive(['a', 'b', 'c']))

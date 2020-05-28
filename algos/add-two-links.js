@@ -2,12 +2,12 @@
 // Output: 7 -> 0 -> 8
 // Explanation: 342 + 465 = 807.
 
-function ListNode(val) {
+const ListNode = (val) => {
   this.val = val;
   this.next = null;
 }
 
-var addTwoNumbers = function(l1, l2) {
+const addTwoNumbers = (l1, l2) => {
   let node = null;
   const carry = arguments[2];
   if (l1 || l2) {
@@ -25,18 +25,18 @@ var addTwoNumbers = function(l1, l2) {
   return node;
 };
 
-const two = new ListNode(2);
-const four1 = new ListNode(4);
-const three = new ListNode(3);
-two.next = four1;
-four1.next = three;
+// const two = new ListNode(2);
+// const four1 = new ListNode(4);
+// const three = new ListNode(3);
+// two.next = four1;
+// four1.next = three;
 
-const five = new ListNode(5);
-const six = new ListNode(6);
-const four2 = new ListNode(4);
-five.next = six;
-six.next = four2;
+// const five = new ListNode(5);
+// const six = new ListNode(6);
+// const four2 = new ListNode(4);
+// five.next = six;
+// six.next = four2;
 
-console.time('time1');
-console.log(addTwoNumbers(two, five));
-console.timeEnd('time1');
+// console.time('time1');
+// console.log(addTwoNumbers(two, five));
+// console.timeEnd('time1');
