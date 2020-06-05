@@ -118,10 +118,9 @@ const solution = (arr) => {
   if (left === right) return '';
   return left > right ? 'Left' : 'Right';
 };
-
 // solution([3, 6, 2, 9, -1, 10]);
 
-const solution = (brackets) => {
+const BR = (brackets) => {
   // Type your solution here
   const len = brackets.length;
   if (len % 2 !== 0 || len < 2) return false;
@@ -146,9 +145,9 @@ const solution = (brackets) => {
   return stack.length === 0 ? true : false;
 };
 
-// console.log(solution(')('));
-// console.log(solution('[](){}'));
-// console.log(solution('[(]{)}'));
+// console.log(BR(')('));
+// console.log(BR('[](){}'));
+// console.log(BR('[(]{)}'));
 
 const lengthOfLongestSubstring = (s) => {
   let maxLen = 0;
@@ -170,3 +169,31 @@ const lengthOfLongestSubstring = (s) => {
 // console.log(lengthOfLongestSubstring('ababc'));
 // console.log(lengthOfLongestSubstring('nndfddf'));
 // console.log(lengthOfLongestSubstring('nanbcdefnf'));
+
+
+const High = (tree) => {
+  let left = 0;
+  let right = 0;
+  let len = tree.length;
+  if(len === 0) return 0;
+  if (len === 1) return 1;
+
+  let arr = tree.slice();
+  let level = 0;
+  let b = [];
+  while (arr.length) {
+    b = arr.splice(0, Math.pow(2, level));
+    console.log(arr)
+    level++;
+  }
+  return b.filter(e => e > 0).length ? level : --level;
+};
+
+// console.log(High([1,2,3,4]));
+
+
+// const arr = [1,1,1,1];
+// const brr = [1,2,3,4,5,6,7];
+
+// console.log(brr.splice(0,1));
+// console.log(brr);

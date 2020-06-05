@@ -61,7 +61,51 @@ function mergeArrays(arr1, arr2) {
 
 const my_array = [3, 4, 6, 10, 11, 15, 21];
 const another_array = [1, 5, 8, 12, 14, 19];
-console.log(mergeArrays(my_array, another_array));
+// console.log(mergeArrays(my_array, another_array));
 // [1, 3, 4, 5, 6, 8, 10, 11, 12, 14, 15, 19, 21]
 
+// function merge(left, right) {
+//   let result = [];
+//   let l = 0;
+//   let r = 0;
+//   while (l < left.length && r < right.length) {
+//     if (left[l] < right[r]) result.push(left[l++]);
+//     else result.push(right[r++]);
+//   }
+//   return result.concat(left.slice(l)).concat(right.slice(r));
+// }
+
+const MS = (array) => {
+  function merge(left, right) {
+    let merged = [];
+    let i = 0;
+    let j = 0;
+    while (i < left.length && j < right.length) {
+      if (left[i] >= right[j]) {
+        merged.push(right[j++]);
+      } else {
+        merged.push(left[i++]);
+      }
+    }
+    return merged.concat(left.slice(i)).concat(right.slice(j));
+  }
+
+  function mergeSort(array) {
+    if (array.length <= 1) {
+      return array;
+    }
+    let middleIndex = Math.floor(array.length / 2);
+    let left = array.slice(0, middleIndex);
+    let right = array.slice(middleIndex);
+    return merge(mergeSort(left), mergeSort(right));
+  }
+  return mergeSort(array)
+};
+
+// console.log(MS([5, 4, -2, 7, 3, -8, 6, 1]))
+
+
+
 module.exports = mergeArrays;
+
+
