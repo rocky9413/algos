@@ -31,7 +31,7 @@ const minSum = (num, k) => {
 };
 // console.log(minSum([3, 5, 6, 3, 3, 3, 8], 5));
 
-//
+// find smallest divisor
 const smallestDivisor = (s, t) => {
   if (s.length % t.length > 0) return -1;
   let newTString = '';
@@ -39,10 +39,10 @@ const smallestDivisor = (s, t) => {
     newTString += t;
   }
   if (newTString !== s) return -1;
+
   for (let i = 1; i <= t.length; i += 1) {
     let commonString = '';
     const subString = t.substring(0, i);
-    console.log(subString);
     while (commonString.length < t.length) {
       commonString += subString;
       console.log(commonString);
@@ -51,3 +51,5 @@ const smallestDivisor = (s, t) => {
   }
   return -1;
 };
+
+// console.log(smallestDivisor('bcdbcdbcdbcd', 'bcdbcd'));
