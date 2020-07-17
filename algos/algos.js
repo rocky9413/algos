@@ -84,23 +84,3 @@ const emitNreceive = (messages) => {
   return myReceiver.messages;
 };
 // console.log(emitNreceive(['a', 'b', 'c']))
-
-// validate if given arr is a bst tree [2,1,3,4,5]
-const isValid = (a) => {
-  if (a.length < 1) return 'NO';
-  const stack = [];
-  let root = Number.NEGATIVE_INFINITY;
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] < root) return 'NO';
-    // all el to the left of root should be smaller than current root
-    while (a[i] > stack[stack.length - 1]) {
-      let temp = stack.pop();
-      root = temp; //assign last root
-    }
-    stack.push(a[i]);
-    // console.log(stack);
-  }
-  return 'YES';
-};
-// console.log(isValid([2, 1, 3, 4, 5]));
-// console.log(isValid([5, 3, 4, 1, 7]));

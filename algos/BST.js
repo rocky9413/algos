@@ -9,7 +9,7 @@ function BinarySearchTree(value) {
   this.left = null;
 }
 
-BinarySearchTree.prototype.add = function(value) {
+BinarySearchTree.prototype.add = function (value) {
   // accepts a value and places in the tree in the correct position.
   const node = new BinarySearchTree(value);
 
@@ -28,7 +28,7 @@ BinarySearchTree.prototype.add = function(value) {
 
 console.log(BinarySearchTree.add(8));
 
-BinarySearchTree.prototype.contains = function(value) {
+BinarySearchTree.prototype.contains = function (value) {
   let checkContain = false;
   //accepts a value and returns a boolean reflecting whether or not the value is contained in the tree.
   (function recur(bst) {
@@ -43,7 +43,7 @@ BinarySearchTree.prototype.contains = function(value) {
   return checkContain;
 };
 
-BinarySearchTree.prototype.max = function() {
+BinarySearchTree.prototype.max = function () {
   if (!this) return null;
   let current = this;
   while (current.right) {
@@ -52,7 +52,7 @@ BinarySearchTree.prototype.max = function() {
   return current.value;
 };
 
-BinarySearchTree.prototype.min = function() {
+BinarySearchTree.prototype.min = function () {
   if (!this) return null;
   let current = this;
   while (current.left) {
@@ -67,7 +67,6 @@ class Bst {
   }
   insert(data) {
     var node = new Node(data);
-
     if (!this.root) {
       this.root = node;
       return this;
@@ -78,7 +77,6 @@ class Bst {
       if (data === current.data) {
         return;
       }
-
       // left node insertion
       if (data < current.data) {
         if (!current.left) {
@@ -87,7 +85,6 @@ class Bst {
         }
         current = current.left;
       }
-
       //right node insertion
       if (data > current.data) {
         if (!current.right) {

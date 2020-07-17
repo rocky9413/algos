@@ -18,7 +18,7 @@ function maxSubarray(arr) {
 
   let localMax = 0;
   let globalMax = Number.NEGATIVE_INFINITY;
-  arr.forEach(elem => {
+  arr.forEach((elem) => {
     localMax = Math.max(elem, elem + localMax);
     globalMax = Math.max(localMax, globalMax);
     // console.log(localMax);
