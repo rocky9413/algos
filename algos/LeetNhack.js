@@ -326,3 +326,33 @@ const isValid = (a) => {
 };
 // console.log(isValid([2, 1, 3, 4, 5]));
 // console.log(isValid([5, 3, 4, 1, 7]));
+
+const longestSequence = (n) => {
+  const s = n.toString();
+  let longest = '';
+  let longestLen = 0;
+  for (let i = 0; i < s.length; ++i) {
+    const occIndex = longest.indexOf(s[i]);
+    longest = longest.concat(s[i]);
+    if (occIndex !== -1) {
+      longest = longest.slice(occIndex + 1);
+    }
+    longestLen = longest.length > longestLen ? longest.length : longestLen;
+  }
+  return longestLen;
+};
+// console.log(longestSequence(1123223));
+
+const paymentTransation = (transactions, taxRate) => {
+  const cache = {};
+  const calculateCostAfterTax = (cost, taxRate) => {
+    if (!cache.hasOwnProperty(cost)) cache[cost] = cost * taxRate;
+    return cache[cost];
+  };
+  const computeTotal = (taxRate) => {
+    return (cost) => calculateCostAfterTax(cost, taxRate);
+  };
+  transactions.map(computeTotal(taxRate));
+  return Object.keys(cache).length;
+};
+// console.log(paymentTransation([10, 24, 12, 8, 10, 24], 1.2));
