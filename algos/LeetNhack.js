@@ -356,3 +356,28 @@ const paymentTransation = (transactions, taxRate) => {
   return Object.keys(cache).length;
 };
 // console.log(paymentTransation([10, 24, 12, 8, 10, 24], 1.2));
+
+const routes = `
+  acct/del
+  about
+  acct/set/pass/reset
+  proj/det/tech
+  prof/info
+  about/me
+`;
+
+const routeObject = (routes) => {
+  const arrString = routes.split('\n').filter((e) => e !== '');
+  return arrString.reduce((accObj, currString) => {
+    const arrElem = currString.trim().split('/');
+    arrElem.reduce((accSub, currElem) => {
+      if (!accSub.hasOwnProperty(currElem)) {
+        accSub[currElem] = {}; // assign property if not exist
+      }
+      return accSub[currElem]; // return as accumulative as child
+    }, accObj); // pass accumuObj as initial value for array element
+    return accObj;
+  }, {});
+};
+
+console.log(routeObject(routes));
