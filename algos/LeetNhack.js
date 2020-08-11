@@ -379,5 +379,23 @@ const routeObject = (routes) => {
     return accObj;
   }, {});
 };
+// console.log(routeObject(routes));
 
-console.log(routeObject(routes));
+const nestedObject = (array, obj) => {
+  if (array.length) {
+    const elem = array.splice(0, 1);
+    if (!obj.hasOwnProperty(elem)) obj[elem] = {}; // assign property if not exist
+    nestedObject(array, obj[elem]);
+  } // if (!array.length) return 'done';
+};
+// Recursive nested object
+const routeComponent = (routes) => {
+  const arrString = routes.split('\n').filter((e) => e !== '');
+  const obj = {};
+  arrString.forEach((elem) => {
+    const arrElem = elem.trim().split('/');
+    nestedObject(arrElem, obj); // assign arrElem to obj
+  });
+  return obj;
+};
+// console.log(routeComponent(routes));
