@@ -399,3 +399,66 @@ const routeComponent = (routes) => {
   return obj;
 };
 // console.log(routeComponent(routes));
+
+// var solution = function (N) {
+//   // let max = Number.MIN_SAFE_INTEGER;
+
+//   // for (let i = N >= 0 ? 0 : 1;    i < `${N}`.length + 1;     i++) {
+//   //   const result = [`${N}`.slice(0, i), '5', `${N}`.slice(i)].join('');
+//   //   if (Number(result) > max) {
+//   //     max = Number(result);
+//   //   }
+//   // }
+//   // return max;
+
+//   let max = Number.NEGATIVE_INFINITY;
+
+//   let i = 0;
+//   if (N < 0) {
+//     i = 1;
+//   }
+
+//   //
+//   while (i < `${N}`.length) {
+//     const numArr = [`${N}`.slice(0, i), '5', `${N}`.slice(i)];
+//     const output = Number(numArr.join(''));
+//     if (output > max) {
+//       max = output;
+//     }
+//     i++;
+//   }
+//   return max;
+// };
+
+// console.log(solution(268)); //5268
+// console.log(solution(670)); //6750
+// console.log(solution(0)); //50
+// console.log(solution(-999)); //-5999
+// console.log(solution(945)); //9545
+// console.log(solution(439)); //5439
+// console.log(solution(-945)); //-5945
+// console.log(solution(-439)); //-4359
+
+function minimumDeletion(S) {
+  let finalStr = '';
+
+  if (S[0] > S[1]) {
+    finalStr += S[1];
+  } else {
+    finalStr += S[0];
+  }
+
+  for (let i = 1; i < S.length; i++) {
+    if (S[i - 1] <= S[i] && finalStr[finalStr.length - 1] <= S[i]) {
+      finalStr += S[i];
+    } else {
+      continue;
+    }
+  }
+
+  console.log(finalStr);
+  return S.length - finalStr.length;
+}
+
+console.log(minimumDeletion('BBAAABABB'));
+console.log(minimumDeletion('AABABABB'));
