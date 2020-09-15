@@ -1,69 +1,39 @@
-// returns true if the number is negative or odd
-const isNegativeOrOdd = (value) => {
-  if (Math.sign(value) === -1 || value % 2 === 1) return true;
-  return false;
-};
-// console.log(isNegativeOrOdd(1)); // -> true
-// console.log(isNegativeOrOdd(-2)); // -> true
-// console.log(isNegativeOrOdd(2));  //-> false
+// returns true if the number is negative or odd | 1 true | -2 true | 2 false
+const isNegativeOrOdd = (value) => Math.sign(value) === -1 || value % 2 === 1;
 
 // repeats the given string count times
-const repeat = (string, count) => {
-  if (count < 1) return '';
-  return string.repeat(count);
-};
+const repeat = (string, count) => (count < 1 ? '' : string.repeat(count));
 // console.log(repeat('abc', 3)); // -> 'abcabcabc'
-// console.log(repeat('*', 3)); // -> '***'
-// console.log(repeat('abc', 0)); // -> ''
+// console.log(repeat('*', 0)); // -> ''
 
-// returns a string that is the reverse of the inputted string
-//  * assume only strings are inputted */
-const reverseString = (string) => {
-  return string.split('').reverse().join('');
-};
-//  console.log(reverseString('hello')); // -> 'olleh'
-//  console.log(reverseString('will')); //-> 'lliw'
+// returns a string that is the reverse of the inputted string | 'hello' -> 'olleh'
+const reverseString = (string) => string.split('').reverse().join('');
 
 // accepts an object and returns an object with key and values switched
 const reverseObject = (object) => {
   const reversed = {};
-  const keyArr = Object.keys(object);
-  for (let i = 0; i < keyArr.length; i++) {
-    reversed[object[keyArr[i]]] = keyArr[i];
+  for (let key in object) {
+    reversed[object[key]] = key;
   }
   return reversed;
 };
-// console.log(reverseObject({a:1,b:"c","d":4})); // -> {1:a, c:"b",4:"d"}
+// console.log(reverseObject({ a: 1, b: 'c', d: 4 })); // -> {1:a, 4:"d", c:"b"}
 
 // Returns boolean of whether argument is classified as a Number object
-const isNumber = (value) => {
-  if (typeof value === 'number') return true;
-  return false;
-};
-// console.log(isNumber(5));
-// console.log(isNumber('hi'));
+const isNumber = (value) => typeof value === 'number';
+// console.log(isNumber(5)); // console.log(isNumber('hi'));
 
 // Returns boolean of whether argument is classified as an Array object
-const isArray = (value) => {
-  return Array.isArray(value);
-};
-// console.log(isArray(5)); // → false
-// console.log(isArray([1,2,3])); // → true
+const isArray = (value) => Array.isArray(value);
+// console.log(isArray(5)); // → false // [1,2,3] → true
 
 // Returns boolean of whether argument is classified as an Object
-const isObject = (value) => {
-  if (typeof value === 'object') return true;
-  return false;
-};
-// console.log(isObject(5));
-// console.log(isObject([1, 2, 3]));
+const isObject = (value) => typeof value === 'object';
+// console.log(isObject(5)); // isObject([1, 2, 3]));
 
 // return boolean of whether argument is classified as null
-const isNull = (value) => {
-  return value === null;
-};
-// console.log(isNull(null));
-// console.log(isNull(5));
+const isNull = (value) => value === null;
+// console.log(isNull(null)); // console.log(isNull(5));
 
 // Creates a clone of an object.
 // DO NOT USE THE BUILT-IN Object.assign FUNCTION
@@ -79,9 +49,7 @@ const shallowClone = clone(users);
 // Return the size of collection.
 // If the argument passed is an array, then return the length of the array.
 // If arg is an object, then return the number of key/value properties.
-const size = (collection) => {
-  return Object.entries(collection).length;
-};
+const size = (collection) => Object.entries(collection).length;
 // console.log(size([1,2,3]));
 // console.log(size({a: 1, b: 2}));
 
@@ -89,9 +57,7 @@ const size = (collection) => {
 // Returns -1 if element is not in array
 // DO NOT USE THE BUILT-IN INDEXOF function
 const indexOf = (array, value) => {
-  return array.findIndex((elem) => {
-    return elem === value;
-  });
+  return array.findIndex((elem) => elem === value);
 };
 // console.log(indexOf([11,22,33], 11)); // → 0
 // console.log(indexOf([11,22,33], 5)); // → -1
@@ -116,9 +82,7 @@ const dropRight = (array, n = 1) => {
 // console.log(dropRight([1, 2, 3], 0));
 
 // Creates a slice of array containing n elements taken from the beginning
-const take = (array, n = 1) => {
-  return array.slice(0, n);
-};
+const take = (array, n = 1) => array.slice(0, n);
 // console.log(take([1, 2, 3]));
 // console.log(take([1, 2, 3], 2));
 // console.log(take([1, 2, 3], 5));
@@ -530,3 +494,5 @@ const arrayFactory = (length, processor) => {
 };
 // const square = n => n * n;
 // console.log(arrayFactory(4, square)); // -> [0, 1, 4, 9]
+
+module.exports = { isNegativeOrOdd, repeat, isNumber };
