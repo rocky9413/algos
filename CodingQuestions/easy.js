@@ -226,6 +226,132 @@ const getNthFib = (n) => {
   return n > 1 ? lastTwo[1] : lastTwo[0];
 };
 
+/**
+ * Product Sum - takes "special" array and returns its product sum
+ * special array - non-empty contains either integers or other special arrays.
+ * The product sum of a special array is the sum of its elements, where special arrays inside it are
+ * summed themselves and then multiplied by their level of depth.
+ * The depth of a special array is how far nested it is. Depth of [] is 1. [[]] is 2.
+ */
+const productSum = (array, depth = 1) => {
+  let sum = 0;
+  for (const elem of array) {
+    if (Array.isArray(elem)) {
+      sum += productSum(elem, depth + 1);
+    } else {
+      sum += elem;
+    }
+  }
+  return sum * depth;
+};
+
+/**
+ * Find Three Largest Numbers - array of at least 3 integers and without sorting the input array
+ * returns a sorted array of the three largests in the input array.
+ * returns duplicdate integers if necessary. e.g. return [10, 10, 12]
+ * for an input array of [10, 5, 9, 10, 12]
+ */
+const findThreeLargestNumbers = (array) => {
+  const threeLargest = [null, null, null];
+
+  const shiftAndUpdate = (arr, n, idx) => {
+    for (let i = 0; i <= idx; i++) {
+      if (i === idx) {
+        arr[i] = n;
+      } else {
+        arr[i] = arr[i + 1];
+      }
+    }
+  };
+  const updateLargest = (array, num) => {
+    if (array[2] === null || num > array[2]) {
+      shiftAndUpdate(array, num, 2);
+    } else if (array[1] === null || num > array[1]) {
+      shiftAndUpdate(array, num, 1);
+    } else if (array[0] === null || num > array[0]) {
+      shiftAndUpdate(array, num, 0);
+    }
+  };
+
+  for (const elem of array) {
+    updateLargest(threeLargest, elem);
+  }
+  return threeLargest;
+};
+
+/**
+ * Binary Search - takes sorted array of integers and target integer.
+ * Function to use Binary Search algorithm to determine if the target is contained in the array
+ * return its index, otherwise -1
+ */
+const binarySearchArray = (array, target) => {
+  const binarySearchHelper = (array, target, left, right) => {
+    if (left > right) return -1;
+    const middle = Math.floor((left + right) / 2);
+    const potentialMatch = array[middle];
+    if (target === potentialMatch) {
+      return middle;
+    } else if (target < potentialMatch) {
+      return binarySearchHelper(array, target, left, middle - 1);
+    } else {
+      return binarySearchHelper(array, target, middle + 1, right);
+    }
+  };
+  return binarySearchHelper(array, target, 0, array.length - 1);
+};
+
+// Bubble Sort - array of integers, return sorted array
+const bubbleSort = (array) => {
+  let isSorted = false;
+  let counter = 0;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < array.length - 1 - counter; i++) {
+      if (array[i] > array[i + 1]) {
+        swap(array, i, i + 1);
+        isSorted = false;
+      }
+    }
+    counter++;
+  }
+  return array;
+};
+
+const swap = (array, i, j) => {
+  // [array[j], array[i]] = [array[i], array[j]];
+  const temp = array[j];
+  array[j] = array[i];
+  array[i] = temp;
+};
+
+// Insertion Sort - array of integers, return sorted array
+const insertionSort = (array) => {
+  for (let i = 1; i < array.length; i++) {
+    let j = i;
+    while (j > 0 && array[j] < array[j - 1]) {
+      swap(array, j, j - 1);
+      --j;
+    }
+  }
+  return array;
+};
+
+// Selection Sort - array of integers, return sorted array
+const selectionSort = (array) => {
+  let startIdx = 0;
+  while (startIdx < array.length - 1) {
+    let smallestIdx = startIdx;
+    for (let i = startIdx + 1; i < array.length; i++) {
+      if (array[smallestIdx] > array[i]) {
+        smallestIdx = i;
+      }
+    }
+    swap(array, startIdx, smallestIdx);
+    startIdx++;
+  }
+  return array;
+};
+
 module.exports = {
   twoNumberSum,
   isValidSubsequence,
@@ -236,4 +362,10 @@ module.exports = {
   classPhotos,
   tandemBicycle,
   getNthFib,
+  productSum,
+  findThreeLargestNumbers,
+  binarySearchArray,
+  bubbleSort,
+  insertionSort,
+  selectionSort,
 };
