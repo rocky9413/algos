@@ -1,18 +1,15 @@
 /**
- * Binary Tree - 1 root, at most 2 children
- * 1 path between root to any node
- * 
+ * Binary Tree - 1 root, at most 2 children, 1 path between root to any node
  *     1
  *    / \
  *   2   3
  *  / \
  * 4   5
- * In-order (Left, Root, Right) : 4 2 5 1 3 | [...root.left, root.val, ...root.right];
  * Pre-order (Root, Left, Right) : 1 2 4 5 3 | [root.val, ...root.left, ...root.right];
+ * In-order (Left, Root, Right) : 4 2 5 1 3 | [...root.left, root.val, ...root.right];
  * Post-order (Left, Right, Root) : 4 5 2 3 1 | [...root.left, ...root.right, root.val];
  * 
- * dfs : stack : 1 2 4 5 3 
- * bfs : queue : 1 2 3 4 5
+ * DFS - stack : 1 2 4 5 3 | BFS - queue : 1 2 3 4 5
  */
 
 const depthFirstSearchByStack = (root) => {
