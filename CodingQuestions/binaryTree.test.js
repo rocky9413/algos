@@ -101,9 +101,5 @@ const {
   test('maxSumPathDFS |  | ', () => {
     const tree = new BinaryTree(3).insert([11, 4, 4, 2, 1])
     const dfsStack = maxSumPathDFS(tree);
-    // const dfsRecursive = minValueDFSRecursive(tree);
-    // const bfsQueue = minValueBFS(tree);
     expect(dfsStack).toEqual(18);
-    // expect(dfsRecursive).toEqual(1);
-    // expect(bfsQueue).toEqual(1);
   });
