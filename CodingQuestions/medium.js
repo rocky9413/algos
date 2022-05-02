@@ -260,7 +260,7 @@ const numberOfWaysToMakeChange = (n, array) => {
     const ways = new Array(n + 1).fill(0);
     ways[0] = 1;
     for (const coin of array) {
-        for (let amount = 1; amount < n + 1; amount++) {
+        for (let amount = 1; amount <= n; amount++) {
             if (coin <= amount) {
                 ways[amount] += ways[amount - coin];
             }
@@ -268,6 +268,52 @@ const numberOfWaysToMakeChange = (n, array) => {
     }
     return ways[n];
 }
+
+/**
+ * Input: array of positive integers representing coin denominations
+ * and a single non-negative integer n representing a target amount of money
+ * returns the smallest number of coins needed to make change to sum up to the target amount
+ */
+const minNumberOfCoinsForChange = (n, array) => {
+    const numbers = new Array(n + 1).fill(Number.POSITIVE_INFINITY);
+    numbers[0] = 0;
+    for (const coin of array) {
+        for (let amount = 1; amount < numbers.length; amount++) {
+            if (coin <= amount) {
+                const prevPlusCoin = numbers[amount - coin] + 1;
+                numbers[amount] = Math.min(numbers[amount], prevPlusCoin);
+            }
+        }
+    }
+    return numbers[n] !== Number.POSITIVE_INFINITY ? numbers[n] : -1;
+};
+
+/**
+ * returns the minimum number of edit operations that need to be performed
+ * on the first string to obtain the second string
+ * There are 3 edit operations: insertion of a character, deletion, and substitution of a character
+ */
+const levenshteinDistance = (str1, str2) => {
+    const table = [];
+    for (let i = 0; i <= str1.length; i++) {
+        const row = [];
+        for (let j = 0; j <= str2.length; j++) {
+            row.push(j);
+        }
+        row[0] = i;
+        table.push(row);
+    }
+    for (let i = 1; i <= str1.length; i++) {
+        for (let j = 1; j <= str2.length; j++) {
+            if (str1[i - 1] === str2[j - 1]) {
+                table[i][j] = table[i - 1][j - 1];
+            } else {
+                table[i][j] = 1 + Math.min(table[i - 1][j - 1], table[i - 1][j], table[i][j - 1]);
+            }
+        }
+    }
+    return table[str1.length][str2.length];
+};
 
 module.exports = {
     threeNumberSum,
@@ -281,5 +327,7 @@ module.exports = {
     mergeOverlappingIntervals,
     maxSubsetSumNoAdjacent,
     numberOfWaysToMakeChange,
+    minNumberOfCoinsForChange,
+    levenshteinDistance
 };
   

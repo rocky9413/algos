@@ -10,6 +10,8 @@ const {
     mergeOverlappingIntervals,
     maxSubsetSumNoAdjacent,
     numberOfWaysToMakeChange,
+    minNumberOfCoinsForChange,
+    levenshteinDistance,
 } = require('./medium');
   
 test('threeNumberSum(array, targetSum)', () => {
@@ -79,11 +81,24 @@ test('maxSubsetSumNoAdjacent(array)', () => {
     expect(result).toEqual(330);
 });
 
-test('numberOfWaysToMakeChange(array)', () => {
+test('numberOfWaysToMakeChange(n, array)', () => {
     const array1 = [1, 5];
     const result1 = numberOfWaysToMakeChange(6, array1);
     const array2 = [1, 5, 10, 25];
     const result2 = numberOfWaysToMakeChange(10, array2);
     expect(result1).toEqual(2);
     expect(result2).toEqual(4);
+});
+
+test('minNumberOfCoinsForChange(n, array)', () => {
+    const array1 = [1, 5, 10];
+    const result1 = minNumberOfCoinsForChange(7, array1);
+    expect(result1).toEqual(3);
+});
+
+test('levenshteinDistance(str1, str2)', () => {
+    const str1 = 'abc';
+    const str2 = 'yabd';
+    const result1 = levenshteinDistance(str1, str2);
+    expect(result1).toEqual(2);
 });
